@@ -1,0 +1,31 @@
+{% extends "Valishina_response/base.html" %}
+{% block title %}Добавить отзыв{% endblock %}
+
+{% block content %}
+<h1>Оставить отзыв об образовательной программе</h1>
+
+{% if error %}
+  <p style="color:red">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <p>
+    <label>Ник:</label><br>
+    <input type="text" name="nickname" required>
+  </p>
+
+  <p>
+    <label>Оценка (1–10):</label><br>
+    <input type="number" name="score" min="1" max="10" required>
+  </p>
+
+  <p>
+    <label>Текст отзыва:</label><br>
+    <textarea name="text" rows="5" required></textarea>
+  </p>
+
+  <button type="submit">Отправить</button>
+</form>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Мой сайт{% endblock %}</title>
+  <style>
+    nav { display:flex; gap:16px; align-items:center; padding:12px; background:#f2f2f2; }
+    nav img { height:28px; vertical-align:middle; }
+    main { padding:16px; }
+  </style>
+</head>
+<body>
+
+  <nav>
+
+    <a href="{% url 'Valishina_response:index' %}">Главная</a>
+
+
+    <a href="{% url 'Valishina_response:page1' %}">Карбонара</a>
+
+     <!-- Ссылка на закладку  --> 
+    <a href="{% url 'Valishina_response:page1' %}#ingredients">К ингредиентам</a>
+
+    <!-- Внешний сайт  -->
+    <a href="https://www.uavgusta.net/articles/italyanskaya_kuhnya/spravochnik_italyanskoy_pastyi/" target="_blank" rel="noopener noreferrer">
+      Справочник пасты
+    </a>
+
+    <a href="{% url 'Valishina_response:index' %}" title="На главную"> <img src="{% static 'Valishina_response/home.png' %}" alt="Домой">
+
+    </a> 
+    <a href="{% url 'Valishina_response:gdp' %}">Задача</a>
+    <a href="{% url 'Valishina_response:program' %}">Программа</a>
+
+    <a href="{% url 'Valishina_response:add_review' %}">Добавить отзыв</a>
+
+    <a href="{% url 'Valishina_response:reviews_list' %}">Отзывы</a>
+
+    <a href="{% url 'Valishina_response:site_index' %}">Страницы (БД)</a>
+
+    <a href="{% url 'Valishina_response:recipes_list' %}">Рецепты (БД)</a>
+
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+</body>
+</html>

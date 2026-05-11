@@ -1,0 +1,43 @@
+{% extends "Valishina_response/base.html" %}
+{% block title %}Рецепты (БД){% endblock %}
+
+{% block content %}
+<h1>Рецепты (контент в базе данных)</h1>
+
+<form method="get">
+  <label>Категория:</label>
+  <input name="category" value="{{ category }}" placeholder="например: паста">
+
+  <label>Показывать:</label>
+  <select name="published">
+    <option value="1" {% if published == "1" %}selected{% endif %}>только опубликованные</option>
+    <option value="0" {% if published == "0" %}selected{% endif %}>все</option>
+  </select>
+
+  <label>Сортировка:</label>
+  <select name="sort">
+    <option value="title" {% if sort == "title" %}selected{% endif %}>по названию</option>
+    <option value="new" {% if sort == "new" %}selected{% endif %}>сначала новые</option>
+    <option value="old" {% if sort == "old" %}selected{% endif %}>сначала старые</option>
+  </select>
+
+  <button type="submit">Применить</button>
+</form>
+
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Название</th><th>Категория</th><th>Опубликован</th><th>Дата</th><th>Текст</th>
+  </tr>
+  {% for r in recipes %}
+  <tr>
+    <td>{{ r.title }}</td>
+    <td>{{ r.category }}</td>
+    <td>{% if r.is_published %}да{% else %}нет{% endif %}</td>
+    <td>{{ r.created_at }}</td>
+    <td>{{ r.content|truncatechars:80 }}</td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="5">Ничего не найдено</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

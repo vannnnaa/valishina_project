@@ -1,0 +1,48 @@
+{% extends "Valishina_response/base.html" %}
+{% block title %}Страницы из БД{% endblock %}
+
+{% block content %}
+<h1>Страницы сайта (контент в БД)</h1>
+
+<form method="get">
+  <label>Поиск:</label>
+  <input type="text" name="q" value="{{ q }}" placeholder="по названию">
+
+  <label>Показывать:</label>
+  <select name="published">
+    <option value="1" {% if published == "1" %}selected{% endif %}>только опубликованные</option>
+    <option value="0" {% if published == "0" %}selected{% endif %}>все (включая скрытые)</option>
+  </select>
+
+  <label>Сортировка:</label>
+  <select name="sort">
+    <option value="title" {% if sort == "title" %}selected{% endif %}>по названию</option>
+    <option value="updated_desc" {% if sort == "updated_desc" %}selected{% endif %}>сначала обновлённые</option>
+    <option value="updated_asc" {% if sort == "updated_asc" %}selected{% endif %}>сначала старые</option>
+  </select>
+
+  <button type="submit">Применить</button>
+</form>
+
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Название</th>
+    <th>slug</th>
+    <th>Опубликована</th>
+    <th>Обновлена</th>
+    <th>Ссылка</th>
+  </tr>
+
+  {% for p in pages %}
+  <tr>
+    <td>{{ p.title }}</td>
+    <td>{{ p.slug }}</td>
+    <td>{% if p.is_published %}да{% else %}нет{% endif %}</td>
+    <td>{{ p.updated_at }}</td>
+    <td><a href="{% url 'Valishina_response:site_page' p.slug %}">Открыть</a></td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="5">Ничего не найдено</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

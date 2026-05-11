@@ -1,0 +1,26 @@
+{% extends "Valishina_response/base.html" %}
+{% block title %}Фильтр стран по ВВП{% endblock %}
+
+{% block content %}
+
+<h1>Фильтр стран по ВВП на душу населения</h1> 
+<form method="post"> {% csrf_token %} 
+    <p>1 строка (страны через пробел)</p> 
+    <textarea name="countries" rows="1" style="width: 600px;"> </textarea> 
+    <p>2 строка (числа через пробел,
+                 для вещественных чисел в качестве разделителя использовать точку)</p> 
+    <textarea name="gdps" rows="1" style="width: 600px;"></textarea> 
+    <p>3 строка (порог)</p> 
+    <input name="threshold" style="width: 200px;"> 
+    <p>
+        <button type="submit">Посчитать</button>
+    </p> 
+</form>
+
+{% if error %}
+
+<p>{{ error }}</p> {% endif %}
+
+{% if result %}
+
+<h2>Результат</h2> {% for c in result %} <div>{{ c }}</div> {% endfor %} {% endif %} {% endblock %}

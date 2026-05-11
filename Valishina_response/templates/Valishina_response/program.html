@@ -1,0 +1,49 @@
+{% extends "Valishina_response/base.html" %}
+{% load static %}
+{% block title %}Образовательная программа{% endblock %}
+
+{% block content %}
+
+<h1>{{ program.name }}</h1>
+<p>{{ program.description }}</p>
+
+<h2>Я</h2>
+<p>{{ me.fio }} | {{ me.email }} | {{ me.phone }}</p>
+
+<h2>Научный руководитель</h2>
+<p>{{ supervisor.fio }} | {{ supervisor.email }}</p>
+
+<h2>Менеджер программы</h2>
+<p>{{ manager.fio }} | {{ manager.email }}</p>
+
+<h2>Сокурсники</h2>
+<table border="1" cellpadding="6">
+  <tr>
+    <th>ФИО</th><th>Email</th><th>Телефон</th>
+  </tr>
+  {% for p in classmates %}
+  <tr>
+    <td>{{ p.fio }}</td>
+    <td>{{ p.email }}</td>
+    <td>{{ p.phone }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Отзывы</h2>
+<p>Всего отзывов: {{ stats.count }}, средняя оценка: {{ stats.avg_score|floatformat:1 }}</p>
+
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Ник</th><th>Оценка</th><th>Текст</th><th>Дата</th>
+  </tr>
+  {% for r in reviews %}
+  <tr>
+    <td>{{ r.nickname }}</td>
+    <td>{{ r.score }}</td>
+    <td>{{ r.text }}</td>
+    <td>{{ r.created_at }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

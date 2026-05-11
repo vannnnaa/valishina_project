@@ -1,0 +1,18 @@
+# venv
+.venv/
+venv/
+
+# python
+__pycache__/
+*.pyc
+
+# django
+staticfiles/
+
+# db (если НЕ хочешь пушить базу)
+# *.sqlite3
+
+# ide
+.vscode/
+.idea/
+.DS_Store
