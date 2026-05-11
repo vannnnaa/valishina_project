@@ -34,7 +34,10 @@
     <td>{{ r.category }}</td>
     <td>{% if r.is_published %}да{% else %}нет{% endif %}</td>
     <td>{{ r.created_at }}</td>
-    <td>{{ r.content|truncatechars:80 }}</td>
+    <td>
+        {{ r.content|truncatechars:80 }}
+        <a href="{% url 'Valishina_response:recipe_detail' r.id %}">Открыть</a>
+    </td>
   </tr>
   {% empty %}
   <tr><td colspan="5">Ничего не найдено</td></tr>

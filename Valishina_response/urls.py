@@ -13,4 +13,5 @@ urlpatterns = [
     path("site/", views.site_index, name="site_index"),
     path("site/<slug:slug>/", views.site_page, name="site_page"),
     path("recipes/", views.recipes_list, name="recipes_list"),
+    path("recipes/<int:recipe_id>/", views.recipe_detail, name="recipe_detail"),
 ]

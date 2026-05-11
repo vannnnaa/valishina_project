@@ -1,0 +1,10 @@
+{% extends "Valishina_response/base.html" %}
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ recipe.title }}</h1>
+<p><b>Категория:</b> {{ recipe.category }}</p>
+<p><b>Дата:</b> {{ recipe.created_at }}</p>
+<hr>
+<div>{{ recipe.content|linebreaks }}</div>
+{% endblock %}

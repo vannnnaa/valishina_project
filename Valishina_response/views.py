@@ -178,3 +178,7 @@ def recipes_list(request):
     return render(request, "Valishina_response/recipes_list.html", {
         "recipes": qs, "category": category, "sort": sort, "published": only_published
     })
+
+def recipe_detail(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    return render(request, "Valishina_response/recipe_detail.html", {"recipe": recipe})
